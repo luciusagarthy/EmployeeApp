@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers
 {
+    [ApiController]
+    [Produces("application/json")]
     [Route("api/employees")]
     public class EmployeeController : ControllerBase
     {
@@ -15,6 +17,10 @@ namespace Backend.Controllers
             _employeeRepository = employeeRepository;
         }
 
+        /// <summary>
+        /// Vrátí záznamy všech zaměstnanců
+        /// </summary>
+
         [HttpGet]
         public async Task<IActionResult> GetEmployees()
         {
@@ -22,6 +28,10 @@ namespace Backend.Controllers
 
             return Ok(employees);
         }
+
+        /// <summary>
+        /// Vrátí záznam zaměstnance na základě zadaného ID
+        /// </summary>
 
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetEmployeeById([FromRoute] int id)
@@ -35,6 +45,10 @@ namespace Backend.Controllers
 
             return Ok(employee.EmployeeToBO());
         }
+
+        /// <summary>
+        /// Uloží nový záznam na základě přiloženého JSON
+        /// </summary>
 
         [HttpPost]
         public async Task<IActionResult> CreateEmployee([FromBody] EmployeeCO employee)
@@ -52,6 +66,10 @@ namespace Backend.Controllers
             return CreatedAtAction(nameof(GetEmployeeById), new { id = employeeModel.Id }, employeeModel);
         }
 
+        /// <summary>
+        /// Upravý údaje zaměstnance na základě zadaného ID a json údajů zaměstnance v těle požadavku
+        /// </summary>
+
         [HttpPut]
         [Route("{id:int}")]
         public async Task<IActionResult> UpdateEmployee([FromRoute] int id, [FromBody] EmployeeCO employee)
@@ -68,6 +86,10 @@ namespace Backend.Controllers
 
             return Ok(employeeModel);
         }
+
+        /// <summary>
+        /// Odstraní záznam zaměstnance z databáze na základě zadaného ID
+        /// </summary>
 
         [HttpDelete]
         [Route("{id:int}")]
