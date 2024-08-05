@@ -12,3 +12,6 @@ Jsou naimplementovány Endpointy:
 - DELETE /api/employees/{id} - odstraní záznam zaměstnance z databáze na základě zadaného ID
 
 Při ukládání záznamu se validuje jedinečnost emailové adresy oproti záznamům v databázi.
+
+Databáze s testovacími daty je vytvořena ve složce ../Data. 
+Pro vytvoření čisté databáze zadejte v projektu příkaz "dotnet ef database update".
